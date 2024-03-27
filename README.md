@@ -1,2 +1,2 @@
 # BellaCompiler
-Bella compiler
+Bella will be published in June.
