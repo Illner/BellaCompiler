@@ -7,6 +7,9 @@ A knowledge compiler for:
 
 **Supported OS**: Linux, macOS (Intel and Apple Silicon), Windows
 
+> [!NOTE]
+> A #SAT solver that uses the same core can be found <a href="https://github.com/Illner/CaraSolver" target="_blank">here</a>.
+
 ## Running Bella
 
 To run the knowledge compiler:
