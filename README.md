@@ -5,10 +5,13 @@ A knowledge compiler for:
 - (s)d-DNNF circuits,
 - wDNNF, pwDNNF and nwDNNF circuits.
 
-**Supported OS**: Linux, macOS (Intel and Apple Silicon), Windows
+**Supported OS**: Linux, macOS (Intel & Apple Silicon), Windows
+
+> [!IMPORTANT]
+> The source code is available in the <a href="https://github.com/Illner/Hydra" target="_blank">Hydra repository</a>.
 
 > [!NOTE]
-> A #SAT solver that uses the same core can be found <a href="https://github.com/Illner/CaraSolver" target="_blank">here</a>.
+> **Cara**, a #SAT solver using the same core, is available in the <a href="https://github.com/Illner/CaraSolver" target="_blank">CaraSolver repository</a>.
 
 ## Running Bella
 
@@ -42,7 +45,7 @@ Circuit types: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; **-sd** - sd-DNNF circuit
 
 Partitioning hypergraph types: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-ph** - PaToH (Linux, macOS), hMETIS (Windows) <br>
+&nbsp;&nbsp;&nbsp;&nbsp; **-ph** - PaToH (Linux, macOS), hMETIS (Windows) *(**recommended**)*<br>
 &nbsp;&nbsp;&nbsp;&nbsp; **-ka** - KaHyPar (Linux, macOS, Windows) <br>
 &nbsp;&nbsp;&nbsp;&nbsp; **-cd** - Cara (Linux, macOS)
 
@@ -143,7 +146,7 @@ of <a href="http://reasoning.cs.ucla.edu/c2d/" target="_blank">the c2d compiler<
 
 * <a href="https://github.com/crillab/d4v2" target="_blank"> MiniSat 2.2.0 (d4 version) </a>
 * <a href="https://github.com/niklasso/minisat" target="_blank"> MiniSat 2.2.0 </a> (<i>implemented, not used</i>)
-* <a href="https://github.com/arminbiere/cadical" target="_blank"> CaDiCaL 2.1.3 </a> (<i>TBD</i>)
+* <a href="https://github.com/arminbiere/cadical" target="_blank"> CaDiCaL 3.0.0 </a> (TBD)
 
 ### Hash map
 
