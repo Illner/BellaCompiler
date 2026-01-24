@@ -22,6 +22,10 @@ To run the knowledge compiler:
 ```
 
 ```console
+./Bella -v
+```
+
+```console
 ./Bella < -w | -pw | -nw | -d | -sd > < -ph | -ka | -cd > -i input_file
         [-c] [-e] [-r] [ -s statistics_file ] [ -o output_file ] [ -t positive_integer (default: 86400) ]
         [ -r_dh | -dlcs_dh | -dlis_dh | -dlcs_dlis_dh | -vsids_dh | -vsads_dh | -jwos_dh | -jwts_dh | -eupc_dh | -aupc_dh ]
@@ -105,6 +109,7 @@ Recomputing hypergraph cut types: <br>
 
 **-h** - help <br>
 **-c** - counts the models <br>
+**-v** - print version information <br>
 **-e** - uses the equivalence simplification method *(**highly recommended**)*<br>
 **-t** - sets the compilation timeout *(default: 86400 s)* <br>
 **-r** - the statistics file is in a form readable by a human
