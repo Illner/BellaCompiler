@@ -149,7 +149,7 @@ of <a href="http://reasoning.cs.ucla.edu/c2d/" target="_blank">the c2d compiler<
 
 ### SAT solver
 
-* <a href="https://github.com/crillab/d4v2" target="_blank"> MiniSat 2.2.0 (d4 version) </a>
+* <a href="https://github.com/crillab/d4v2" target="_blank"> MiniSat 2.2.0 (d4v2 version) </a>
 * <a href="https://github.com/niklasso/minisat" target="_blank"> MiniSat 2.2.0 </a> (<i>implemented, not used</i>)
 * <a href="https://github.com/arminbiere/cadical" target="_blank"> CaDiCaL 3.0.0 </a> (TBD)
 
@@ -162,7 +162,7 @@ of <a href="http://reasoning.cs.ucla.edu/c2d/" target="_blank">the c2d compiler<
 ### Hypergraph partitioning
 
 * <a href="https://faculty.cc.gatech.edu/~umit/software.html" target="_blank"> PaToH v3.3 </a> (<i>used for Linux, and macOS</i>)
-* <a href="http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview" target="_blank"> hMETIS 1.5 </a> (<i>used only for Windows</i>)
+* <a href="http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview" target="_blank"> hMETIS 1.5.3 </a> (<i>used only for Windows</i>)
 * <a href="https://kahypar.org/" target="_blank"> KaHyPar v.1.3.3 </a>
 
 ### Other
