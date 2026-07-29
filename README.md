@@ -3,27 +3,31 @@
 A knowledge compiler for:
 
 - (s)d-DNNF circuits,
-- wDNNF, pwDNNF and nwDNNF circuits.
+- wDNNF, pwDNNF, and nwDNNF circuits.
 
-**Supported OS**: Linux, macOS (Intel & Apple Silicon), Windows
+**Supported OS**: Linux, macOS (Apple Silicon), and Windows
 
 > [!IMPORTANT]
-> The source code is available in the <a href="https://github.com/Illner/Hydra" target="_blank">Hydra repository</a>.
+> The source code is available in the [Hydra repository](https://github.com/Illner/Hydra).
 
 > [!NOTE]
-> **Cara**, a #SAT solver using the same core, is available in the <a href="https://github.com/Illner/CaraSolver" target="_blank">CaraSolver repository</a>.
+> **Cara**, an isomorphism-aware #SAT solver using the same core, is available in the [CaraSolver repository](https://github.com/Illner/CaraSolver).
 
 ## Running Bella
 
-To run the knowledge compiler:
+To print the help:
 
 ```console
 ./Bella -h
 ```
 
+To print the version:
+
 ```console
 ./Bella -v
 ```
+
+To run the knowledge compiler:
 
 ```console
 ./Bella < -w | -pw | -nw | -d | -sd > < -ph | -ka | -cd > -i input_file
@@ -34,95 +38,117 @@ To run the knowledge compiler:
         [ -n_hnw | -s_hnw | -cl_hnw ] [ -a_rhc | -iup_rhc | -fs_rhc | -ehc_rhc | -iup_fs_rhc ]
 ```
 
+### Recommended Usage
+
+On Linux and macOS:
+
+```console
+./Bella -w -ph -e -i input_file
+```
+
+On Windows:
+
+```console
+./Bella -w -ka -e -i input_file
+```
+
 > [!TIP]
 > On Windows, hMETIS is significantly slower because it communicates via files.
 > Therefore, we suggest using KaHyPar instead.
 
+> [!NOTE]
+> Replace `-w` with the desired circuit type (see [Configurations](#configurations)).
+
 ### Configurations
 
-Circuit types: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-w** — wDNNF circuit <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-pw** — pwDNNF circuit <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-nw** — nwDNNF circuit <br>
+Circuit types:
+* **-w** — wDNNF circuit
+* **-pw** — pwDNNF circuit
+* **-nw** — nwDNNF circuit
 
-&nbsp;&nbsp;&nbsp;&nbsp; **-d** — d-DNNF circuit <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-sd** — sd-DNNF circuit
 
-Partitioning hypergraph types: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-ph** — PaToH (Linux, macOS), hMETIS (Windows) *(**recommended**)*<br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-ka** — KaHyPar (Linux, macOS, Windows) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-cd** — Cara (Linux, macOS)
+* **-d** — d-DNNF circuit
+* **-sd** — sd-DNNF circuit
 
-Files: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-i** — specifies the CNF file name <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-s** — specifies the file name where the statistics will be saved <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-o** — specifies the file name where the compiled circuit will be saved
+Hypergraph partitioning:
+* **-ph** — PaToH (Linux and macOS), hMETIS (Windows) *(**recommended** on Linux and macOS)*
+* **-ka** — KaHyPar (Linux, macOS, and Windows) *(**recommended** on Windows)*
+* **-cd** — Cara (Linux and macOS)
 
-Decision heuristics: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-r_dh** — random <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-dlcs_dh** — dynamic largest combined sum (DLCS) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-dlis_dh** — dynamic largest individual sum (DLIS) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-dlcs_dlis_dh** — DLCS + DLIS as a tie-breaker (DLCS-DLIS) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-vsids_dh** — variable state independent decaying sum (VSIDS) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-vsads_dh** — variable state aware decaying sum (VSADS) *(default)* <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-jwos_dh** — Jeroslow-Wang (one-sided) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-jwts_dh** — Jeroslow-Wang (two-sided) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-eupc_dh** — exact unit propagation count (EUPC) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-aupc_dh** — approximate unit propagation count (AUPC)
+Files:
+* **-i** — specify the CNF file name
+* **-s** — specify the file name where the statistics will be saved
+* **-o** — specify the file name where the compiled circuit will be saved
 
-Component caching schemes: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-n_ccs** — none <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-s_ccs** — standard <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-h_ccs** — hybrid <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-b_ccs** — basic <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-i_ccs** — i *(default)* <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-c_ccs** — Cara: optionally sets the number of sample moments *(min: 0, max: 10, default: 2)*
+Decision heuristics:
+* **-r_dh** — random
+* **-dlcs_dh** — dynamic largest combined sum (DLCS)
+* **-dlis_dh** — dynamic largest individual sum (DLIS)
+* **-dlcs_dlis_dh** — DLCS + DLIS as a tie-breaker (DLCS-DLIS)
+* **-vsids_dh** — variable state independent decaying sum (VSIDS)
+* **-vsads_dh** — variable state aware decaying sum (VSADS) *(default)*
+* **-jwos_dh** — Jeroslow–Wang (one-sided)
+* **-jwts_dh** — Jeroslow–Wang (two-sided)
+* **-eupc_dh** — exact unit propagation count (EUPC)
+* **-aupc_dh** — approximate unit propagation count (AUPC)
 
-Component cache cleaning strategies: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-n_cccs** — none <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-s_cccs** — sharpSAT <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-c_cccs** — Cara *(default)*
+Component caching schemes:
+* **-n_ccs** — none
+* **-s_ccs** — standard
+* **-h_ccs** — hybrid
+* **-b_ccs** — basic
+* **-i_ccs** — i *(default)*
+* **-c_ccs** — Cara: optionally sets the number of sample moments *(min: 0, max: 10, default: 2)*
 
-Hypergraph cut caching schemes: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-n_hccs** — none *(default)* <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-s_hccs** — standard <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-h_hccs** — hybrid <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-b_hccs** — basic <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-c_hccs** — Cara: optionally sets the number of sample moments *(min: 0, max: 10, default: 2)*
+> [!NOTE]
+> All the component caching schemes except Cara's are described in
+> J.-M. Lagniez and P. Marquis, _Enhanced Caching for #SAT Solving_, 2020 (preprint), <https://hal.science/hal-02963599>.
 
-Hypergraph cut cache cleaning strategies: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-n_hcccs** — none *(default)* <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-s_hcccs** — sharpSAT <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-c_hcccs** — Cara
+Component cache cleaning strategies:
+* **-n_cccs** — none
+* **-s_cccs** — sharpSAT
+* **-c_cccs** — Cara *(default)*
 
-Hypergraph node weight types: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-n_hnw** — none <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-s_hnw** — standard <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-cl_hnw** — clause length *(default)*
+Hypergraph cut caching schemes:
+* **-n_hccs** — none *(default)*
+* **-s_hccs** — standard
+* **-h_hccs** — hybrid
+* **-b_hccs** — basic
+* **-c_hccs** — Cara: optionally sets the number of sample moments *(min: 0, max: 10, default: 2)*
 
-Recomputing hypergraph cut types: <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-a_rhc** — hypergraph cuts are computed at each node <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-iup_rhc** — a new hypergraph cut is computed when immense unit propagation is performed *(default)* <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-fs_rhc** — a new hypergraph cut is computed when the current formula is split <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-ehc_rhc** — a new hypergraph cut is computed when the current hypergraph cut is empty <br>
-&nbsp;&nbsp;&nbsp;&nbsp; **-iup_fs_rhc** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
+Hypergraph cut cache cleaning strategies:
+* **-n_hcccs** — none *(default)*
+* **-s_hcccs** — sharpSAT
+* **-c_hcccs** — Cara
 
-**-h** — help <br>
-**-c** — counts the models <br>
-**-v** — print version information <br>
-**-e** — uses the equivalence simplification method *(**highly recommended**)*<br>
-**-t** — sets the compilation timeout *(default: 86400 s)* <br>
-**-r** — the statistics file is in a form readable by a human
+Hypergraph node weight types:
+* **-n_hnw** — none
+* **-s_hnw** — standard
+* **-cl_hnw** — clause length *(default)*
 
-### Syntax of circuit files
+Hypergraph cut recomputation strategies:
+* **-a_rhc** — hypergraph cuts are computed at each node
+* **-iup_rhc** — a new hypergraph cut is computed when immense unit propagation is performed *(default)*
+* **-fs_rhc** — a new hypergraph cut is computed when the current formula is split
+* **-ehc_rhc** — a new hypergraph cut is computed when the current hypergraph cut is empty
+* **-iup_fs_rhc** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
 
-The file format is the same as defined in the user manual (Section C)
-of <a href="http://reasoning.cs.ucla.edu/c2d/" target="_blank">the c2d compiler</a>. <br>
+General options:
+* **-h** — print the help message
+* **-c** — count the models
+* **-v** — print version information
+* **-e** — use the equivalence simplification method *(**highly recommended**)*
+* **-t** — set the compilation timeout *(default: 86400 s)*
+* **-r** — write the statistics file in a human-readable form
 
-* a weak AND node is specified as follows: ***B*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
-* a positive weak AND node is specified as follows: ***P*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
-* a negative weak AND node is specified as follows: ***N*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
-* a (classical) decomposable AND node is specified as follows: ***A*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
+### Syntax of Circuit Files
+
+The file format extends the one defined in the user manual (Section C) of [the c2d compiler](http://reasoning.cs.ucla.edu/c2d/).
+
+* A weak AND node is specified as follows: ***B*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
+* A positive weak AND node is specified as follows: ***P*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
+* A negative weak AND node is specified as follows: ***N*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
+* A (classical) decomposable AND node is specified as follows: ***A*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
 
 ## HydraTest
 
@@ -131,7 +157,7 @@ of <a href="http://reasoning.cs.ucla.edu/c2d/" target="_blank">the c2d compiler<
 ```
 
 > [!WARNING]
-> Some tests for caching assume that the type "unsigned long long int" has precisely 64 bits.
+> Some tests for caching assume that the type `unsigned long long int` has precisely 64 bits.
 
 > [!NOTE]
 > The test takes around 10 seconds.
@@ -143,60 +169,73 @@ of <a href="http://reasoning.cs.ucla.edu/c2d/" target="_blank">the c2d compiler<
 ```
 
 > [!NOTE]
-> The test takes around one hour.
+> The test takes around 1 hour.
 
-## Used software
+## Third-Party Software
 
-### SAT solver
+### SAT Solvers
 
-* <a href="https://github.com/crillab/d4v2" target="_blank"> MiniSat 2.2.0 (d4v2 version) </a>
-* <a href="https://github.com/niklasso/minisat" target="_blank"> MiniSat 2.2.0 </a> (<i>implemented, not used</i>)
-* <a href="https://github.com/arminbiere/cadical" target="_blank"> CaDiCaL 3.0.0 </a> (TBD)
+* [MiniSat 2.2.0 (d4v2 version)](https://github.com/crillab/d4v2)
 
-### Hash map
+* [Glucose 3.0 (d4v2 version)](https://github.com/crillab/d4v2) — _work in progress_
 
-* <a href="https://github.com/martinus/unordered_dense" target="_blank"> unordered_dense v4.5.0 </a>
-* <a href="https://github.com/martinus/robin-hood-hashing" target="_blank"> robin-hood-hashing 3.11.5 </a>
-* <a href="https://github.com/skarupke/flat_hash_map" target="_blank"> flat_hash_map </a> (<i>implemented, not used</i>)
+* [MiniSat 2.2.0](https://github.com/niklasso/minisat) — _implemented, not used_
 
-### Hypergraph partitioning
+* [CaDiCaL 3.0.0](https://github.com/arminbiere/cadical) — _work in progress_
 
-* <a href="https://faculty.cc.gatech.edu/~umit/software.html" target="_blank"> PaToH v3.3 </a> (<i>used for Linux, and macOS</i>)
-* <a href="http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview" target="_blank"> hMETIS 1.5.3 </a> (<i>used only for Windows</i>)
-* <a href="https://kahypar.org/" target="_blank"> KaHyPar v.1.3.3 </a>
+### Hash Maps
 
-### Other
+* [unordered_dense v4.5.0](https://github.com/martinus/unordered_dense)
 
-* <a href="https://www.boost.org/" target="_blank"> Boost </a>
+* [robin-hood-hashing 3.11.5](https://github.com/martinus/robin-hood-hashing)
+
+* [flat_hash_map](https://github.com/skarupke/flat_hash_map) — _implemented, not used_
+
+### Hypergraph Partitioning
+
+* [PaToH v3.3](https://faculty.cc.gatech.edu/~umit/software.html) — _used on Linux and macOS_
+
+* [hMETIS 1.5.3](https://papers.karypis.org/glaros/software/metis/overview.html) — _used only on Windows_
+
+* [KaHyPar v.1.3.3](https://kahypar.org/) — _used on Linux, macOS, and Windows_
+
+## Licence
+
+Bella is released under the [MIT License](LICENSE). The bundled third-party software components (see above) are subject to their own licences. Some of them are restricted to academic and research use. For the licences, see `Hydra/external/` in
+the [Hydra repository](https://github.com/Illner/Hydra).
 
 ## Papers
 
 If you use **Bella for (s)d-DNNF/wDNNF circuits** in an academic setting, please cite the following paper describing the knowledge compiler:
 
-    @article{Illner_Kucera_2024, 
-        author  = {Illner, Petr and Kučera, Petr}, 
-        title   = {A Compiler for Weak Decomposable Negation Normal Form}, 
-        volume  = {38}, 
-        url     = {https://ojs.aaai.org/index.php/AAAI/article/view/28926}, 
-        DOI     = {10.1609/aaai.v38i9.28926}, 
-        number  = {9}, 
-        journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
-        year    = {2024}, 
-        month   = {Mar.}, 
-        pages   = {10562-10570} 
-    }
+```bibtex
+@article{Illner_Kucera_2024, 
+    author  = {Illner, Petr and Ku\v{c}era, Petr}, 
+    title   = {A Compiler for Weak Decomposable Negation Normal Form}, 
+    volume  = {38}, 
+    url     = {https://ojs.aaai.org/index.php/AAAI/article/view/28926}, 
+    DOI     = {10.1609/aaai.v38i9.28926}, 
+    number  = {9}, 
+    journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
+    year    = {2024}, 
+    month   = {Mar.}, 
+    pages   = {10562-10570} 
+}
+```
 
 If you use **Bella for pwDNNF/nwDNNF circuits** or **Cara** in an academic setting, please cite the following paper describing the knowledge compiler and caching scheme:
 
-    @article{Illner_2025, 
-        author  = {Illner, Petr}, 
-        title   = {New Compilation Languages Based on Restricted Weak Decomposability}, 
-        volume  = {39}, 
-        url     = {https://ojs.aaai.org/index.php/AAAI/article/view/33643}, 
-        DOI     = {10.1609/aaai.v39i14.33643}, 
-        number  = {14}, 
-        journal = {Proceedings of the AAAI Conference on Artificial Intelligence}, 
-        year    = {2025}, 
-        month   = {Apr.}, 
-        pages   = {14987-14996} 
-    }
+```bibtex
+@article{Illner_2025, 
+    author  = {Illner, Petr}, 
+    title   = {New Compilation Languages Based on Restricted Weak Decomposability}, 
+    volume  = {39}, 
+    url     = {https://ojs.aaai.org/index.php/AAAI/article/view/33643}, 
+    DOI     = {10.1609/aaai.v39i14.33643}, 
+    number  = {14}, 
+    journal = {Proceedings of the AAAI Conference on Artificial Intelligence}, 
+    year    = {2025}, 
+    month   = {Apr.}, 
+    pages   = {14987-14996} 
+}
+```
