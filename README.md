@@ -66,7 +66,6 @@ Circuit types:
 * **-pw** — pwDNNF circuit
 * **-nw** — nwDNNF circuit
 
-
 * **-d** — d-DNNF circuit
 * **-sd** — sd-DNNF circuit
 
@@ -134,12 +133,15 @@ Hypergraph cut recomputation strategies:
 * **-iup_fs_rhc** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
 
 General options:
-* **-h** — print the help message
 * **-c** — count the models
+* **-h** — print the help message
 * **-v** — print version information
 * **-e** — use the equivalence simplification method *(**highly recommended**)*
 * **-t** — set the compilation timeout *(default: 86400 s)*
 * **-r** — write the statistics file in a human-readable form
+
+> [!NOTE]
+> For wDNNF, pwDNNF, and nwDNNF circuits, model counting is also supported, but the models are counted using enumeration, so counting runs with polynomial delay rather than in polynomial time.
 
 ### Syntax of Circuit Files
 
@@ -150,7 +152,11 @@ The file format extends the one defined in the user manual (Section C) of [the c
 * A negative weak AND node is specified as follows: ***N*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
 * A (classical) decomposable AND node is specified as follows: ***A*** *c i<sub>1</sub> i<sub>2</sub> ... i<sub>c</sub>*
 
-## HydraTest
+## Tests
+
+Bella ships with two test binaries. Run both to verify a build.
+
+### HydraTest
 
 ```console
 ./HydraTest
@@ -162,7 +168,7 @@ The file format extends the one defined in the user manual (Section C) of [the c
 > [!NOTE]
 > The test takes around 10 seconds.
 
-## BellaTest
+### BellaTest
 
 ```console
 ./BellaTest
