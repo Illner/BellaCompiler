@@ -65,7 +65,6 @@ Circuit types:
 * **-w** — wDNNF circuit
 * **-pw** — pwDNNF circuit
 * **-nw** — nwDNNF circuit
-
 * **-d** — d-DNNF circuit
 * **-sd** — sd-DNNF circuit
 
@@ -132,7 +131,7 @@ Hypergraph cut recomputation strategies:
 * **-ehc_rhc** — a new hypergraph cut is computed when the current hypergraph cut is empty
 * **-iup_fs_rhc** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
 
-General options:
+Other options:
 * **-c** — count the models
 * **-h** — print the help message
 * **-v** — print version information
