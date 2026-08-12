@@ -31,11 +31,12 @@ To run the knowledge compiler:
 
 ```console
 ./Bella < -w | -pw | -nw | -d | -sd > < -ph | -ka | -cd > -i input_file
-        [-c] [-e] [-r] [ -s statistics_file ] [ -o output_file ] [ -t positive_integer (default: 86400) ]
+        [-c] [-e] [-r] [-ccef] [ -s statistics_file ] [ -o output_file ] [ -t positive_integer (default: 86400) ]
+        [ -m_ss | -g_ss ]
         [ -r_dh | -dlcs_dh | -dlis_dh | -dlcs_dlis_dh | -vsids_dh | -vsads_dh | -jwos_dh | -jwts_dh | -eupc_dh | -aupc_dh ]
         [ -n_ccs | -s_ccs | -h_ccs | -b_ccs | -i_ccs | -c_ccs [integer] (min: 0, max: 10, default: 2) ] [ -n_cccs | -s_cccs | -c_cccs ]
         [ -n_hccs | -s_hccs | -h_hccs | -b_hccs | -c_hccs [integer] (min: 0, max: 10, default: 2) ] [ -n_hcccs | -s_hcccs | -c_hcccs ]
-        [ -n_hnw | -s_hnw | -cl_hnw ] [ -a_rhc | -iup_rhc | -fs_rhc | -ehc_rhc | -iup_fs_rhc ]
+        [ -n_hnw | -s_hnw | -cl_hnw ] [ -a_hcrs | -iup_hcrs | -fs_hcrs | -ehc_hcrs | -iup_fs_hcrs ]
 ```
 
 ### Recommended Usage
@@ -77,6 +78,10 @@ Files:
 * **-i** — specify the CNF file name
 * **-s** — specify the file name where the statistics will be saved
 * **-o** — specify the file name where the compiled circuit will be saved
+
+SAT solvers:
+* **-m_ss** — MiniSat *(default)*
+* **-g_ss** — Glucose
 
 Decision heuristics:
 * **-r_dh** — random
@@ -125,11 +130,11 @@ Hypergraph node weight types:
 * **-cl_hnw** — clause length *(default)*
 
 Hypergraph cut recomputation strategies:
-* **-a_rhc** — hypergraph cuts are computed at each node
-* **-iup_rhc** — a new hypergraph cut is computed when immense unit propagation is performed *(default)*
-* **-fs_rhc** — a new hypergraph cut is computed when the current formula is split
-* **-ehc_rhc** — a new hypergraph cut is computed when the current hypergraph cut is empty
-* **-iup_fs_rhc** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
+* **-a_hcrs** — hypergraph cuts are computed at each node
+* **-iup_hcrs** — a new hypergraph cut is computed when immense unit propagation is performed *(default)*
+* **-fs_hcrs** — a new hypergraph cut is computed when the current formula is split
+* **-ehc_hcrs** — a new hypergraph cut is computed when the current hypergraph cut is empty
+* **-iup_fs_hcrs** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
 
 Other options:
 * **-c** — count the models
@@ -138,6 +143,7 @@ Other options:
 * **-e** — use the equivalence simplification method *(**highly recommended**)*
 * **-t** — set the compilation timeout *(default: 86400 s)*
 * **-r** — write the statistics file in a human-readable form
+* **-ccef** — check whether the compiled circuit entails the input CNF formula
 
 > [!NOTE]
 > For wDNNF, pwDNNF, and nwDNNF circuits, model counting is also supported, but the models are counted using enumeration, so counting runs with polynomial delay rather than in polynomial time.
@@ -182,15 +188,17 @@ Bella ships with two test binaries. Run both to verify a build.
 
 * [MiniSat 2.2.0 (d4v2 version)](https://github.com/crillab/d4v2)
 
-* [Glucose 3.0 (d4v2 version)](https://github.com/crillab/d4v2) — _work in progress_
+* [Glucose 3.0 (d4v2 version)](https://github.com/crillab/d4v2)
 
 * [MiniSat 2.2.0](https://github.com/niklasso/minisat) — _implemented, not used_
+
+* [Glucose 4.2.1](https://github.com/audemard/glucose) — _work in progress_
 
 * [CaDiCaL 3.0.0](https://github.com/arminbiere/cadical) — _work in progress_
 
 ### Hash Maps
 
-* [unordered_dense v4.5.0](https://github.com/martinus/unordered_dense)
+* [unordered_dense v4.9.1](https://github.com/martinus/unordered_dense)
 
 * [robin-hood-hashing 3.11.5](https://github.com/martinus/robin-hood-hashing)
 
@@ -200,9 +208,13 @@ Bella ships with two test binaries. Run both to verify a build.
 
 * [PaToH v3.3](https://faculty.cc.gatech.edu/~umit/software.html) — _used on Linux and macOS_
 
-* [hMETIS 1.5.3](https://papers.karypis.org/glaros/software/metis/overview.html) — _used only on Windows_
+* [hMETIS 1.5.3](https://papers.karypis.org/glaros/software/metis/overview.html#hmetis---hypergraph--circuit-partitioning) — _used only on Windows_
 
 * [KaHyPar v.1.3.3](https://kahypar.org/) — _used on Linux, macOS, and Windows_
+
+### Unit Testing
+
+* [Catch2 v2.13.10](https://github.com/catchorg/Catch2)
 
 ## Licence
 
