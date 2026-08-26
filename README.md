@@ -74,6 +74,10 @@ Hypergraph partitioning:
 * **-ka** — KaHyPar (Linux, macOS, and Windows) *(**recommended** on Windows)*
 * **-cd** — Cara (Linux and macOS)
 
+> [!NOTE]
+> The Cara hypergraph partitioner (the **-cd** flag) is dynamic: KaHyPar (better cuts, slower) for larger components, PaToH (worse cuts, faster) for smaller ones.
+> The threshold that decides between KaHyPar and PaToH is determined at runtime from cache statistics.
+
 Files:
 * **-i** — specify the CNF file name
 * **-s** — specify the file name where the statistics will be saved
