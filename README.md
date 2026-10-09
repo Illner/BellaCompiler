@@ -1,4 +1,8 @@
-# Bella
+<!-- # Bella -->
+
+<p align="center">
+  <img src="./logo.svg" alt="Bella" width="400">
+</p>
 
 A knowledge compiler for:
 
@@ -32,7 +36,7 @@ To run the knowledge compiler:
 ```console
 ./Bella < -w | -pw | -nw | -d | -sd > < -ph | -ka | -cd > -i input_file
         [-c] [-e] [-r] [-ccef] [ -s statistics_file ] [ -o output_file ] [ -t positive_integer (default: 86400) ]
-        [ -m_ss | -g_ss ]
+        [ -seed integer (min: 0, max: 2147483646, default: randomised) ] [ -m_ss | -g_ss ]
         [ -r_dh | -dlcs_dh | -dlis_dh | -dlcs_dlis_dh | -vsids_dh | -vsads_dh | -jwos_dh | -jwts_dh | -eupc_dh | -aupc_dh ]
         [ -n_ccs | -s_ccs | -h_ccs | -b_ccs | -i_ccs | -c_ccs [integer] (min: 0, max: 10, default: 2) ] [ -n_cccs | -s_cccs | -c_cccs ]
         [ -n_hccs | -s_hccs | -h_hccs | -b_hccs | -c_hccs [integer] (min: 0, max: 10, default: 2) ] [ -n_hcccs | -s_hcccs | -c_hcccs ]
@@ -63,6 +67,7 @@ On Windows:
 ### Configurations
 
 Circuit types:
+
 * **-w** — wDNNF circuit
 * **-pw** — pwDNNF circuit
 * **-nw** — nwDNNF circuit
@@ -70,6 +75,7 @@ Circuit types:
 * **-sd** — sd-DNNF circuit
 
 Hypergraph partitioning:
+
 * **-ph** — PaToH (Linux and macOS), hMETIS (Windows) *(**recommended** on Linux and macOS)*
 * **-ka** — KaHyPar (Linux, macOS, and Windows) *(**recommended** on Windows)*
 * **-cd** — Cara (Linux and macOS)
@@ -79,15 +85,18 @@ Hypergraph partitioning:
 > The threshold that decides between KaHyPar and PaToH is determined at runtime from cache statistics.
 
 Files:
+
 * **-i** — specify the CNF file name
 * **-s** — specify the file name where the statistics will be saved
 * **-o** — specify the file name where the compiled circuit will be saved
 
 SAT solvers:
+
 * **-m_ss** — MiniSat *(default)*
 * **-g_ss** — Glucose
 
 Decision heuristics:
+
 * **-r_dh** — random
 * **-dlcs_dh** — dynamic largest combined sum (DLCS)
 * **-dlis_dh** — dynamic largest individual sum (DLIS)
@@ -100,6 +109,7 @@ Decision heuristics:
 * **-aupc_dh** — approximate unit propagation count (AUPC)
 
 Component caching schemes:
+
 * **-n_ccs** — none
 * **-s_ccs** — standard
 * **-h_ccs** — hybrid
@@ -112,11 +122,13 @@ Component caching schemes:
 > J.-M. Lagniez and P. Marquis, _Enhanced Caching for #SAT Solving_, 2020 (preprint), <https://hal.science/hal-02963599>.
 
 Component cache cleaning strategies:
+
 * **-n_cccs** — none
 * **-s_cccs** — sharpSAT
 * **-c_cccs** — Cara *(default)*
 
 Hypergraph cut caching schemes:
+
 * **-n_hccs** — none *(default)*
 * **-s_hccs** — standard
 * **-h_hccs** — hybrid
@@ -124,16 +136,19 @@ Hypergraph cut caching schemes:
 * **-c_hccs** — Cara: optionally sets the number of sample moments *(min: 0, max: 10, default: 2)*
 
 Hypergraph cut cache cleaning strategies:
+
 * **-n_hcccs** — none *(default)*
 * **-s_hcccs** — sharpSAT
 * **-c_hcccs** — Cara
 
 Hypergraph node weight types:
+
 * **-n_hnw** — none
 * **-s_hnw** — standard
 * **-cl_hnw** — clause length *(default)*
 
 Hypergraph cut recomputation strategies:
+
 * **-a_hcrs** — hypergraph cuts are computed at each node
 * **-iup_hcrs** — a new hypergraph cut is computed when immense unit propagation is performed *(default)*
 * **-fs_hcrs** — a new hypergraph cut is computed when the current formula is split
@@ -141,9 +156,11 @@ Hypergraph cut recomputation strategies:
 * **-iup_fs_hcrs** — a new hypergraph cut is computed when immense unit propagation is performed, or the current formula is split
 
 Other options:
+
 * **-c** — count the models
 * **-h** — print the help message
 * **-v** — print version information
+* **-seed** — set the seed *(default: randomised)*
 * **-e** — use the equivalence simplification method *(**highly recommended**)*
 * **-t** — set the compilation timeout *(default: 86400 s)*
 * **-r** — write the statistics file in a human-readable form
@@ -194,15 +211,13 @@ Bella ships with two test binaries. Run both to verify a build.
 
 * [Glucose 3.0 (d4v2 version)](https://github.com/crillab/d4v2)
 
+* [CaDiCaL 3.0.1 (Hydra version)](https://github.com/arminbiere/cadical) — _work in progress_
+
 * [MiniSat 2.2.0](https://github.com/niklasso/minisat) — _implemented, not used_
-
-* [Glucose 4.2.1](https://github.com/audemard/glucose) — _work in progress_
-
-* [CaDiCaL 3.0.0](https://github.com/arminbiere/cadical) — _work in progress_
 
 ### Hash Maps
 
-* [unordered_dense v4.9.1](https://github.com/martinus/unordered_dense)
+* [unordered_dense v5.3.1](https://github.com/martinus/unordered_dense)
 
 * [robin-hood-hashing 3.11.5](https://github.com/martinus/robin-hood-hashing)
 
@@ -215,6 +230,10 @@ Bella ships with two test binaries. Run both to verify a build.
 * [hMETIS 1.5.3](https://papers.karypis.org/glaros/software/metis/overview.html#hmetis---hypergraph--circuit-partitioning) — _used only on Windows_
 
 * [KaHyPar v.1.3.3](https://kahypar.org/) — _used on Linux, macOS, and Windows_
+
+### CNF Preprocessors
+
+* [bipe v1.1.0](https://github.com/jm62300/bipe) — _work in progress_
 
 ### Unit Testing
 
